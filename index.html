@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Message Generator</title>
+    <style>
+
+</style>
+
+
+</head>
+<body>
+
+<h4>Ketik atau salin pada text area dibawah ini!</h4> <br>
+<textarea id="theTextArea" name="theTextArea" rows="5" cols="60"></textarea> <br> <br>
+<button id="decryptButton" onclick="decrypt()">Encrypt/Decrypt</button> <br> <br> <br>
+
+
+<div id="theResult"></div>
+
+<script>
+    function encryptAndDecrypt(theText) {
+        let theKey = {};
+let aToZ = "abcdefghijklmnopqrstuvwxyz";
+let zToA = "zyxwvutsrqponmlkjihgfedcba";
+let counter = 0;
+for (let letter of aToZ) {
+    theKey[letter] = zToA[counter];
+counter++
+}
+
+let loweredText = theText.toLowerCase();
+let alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+let result = [];
+ for (let letter of loweredText) {
+  if (letter === " ") {
+    result.push(" ");
+  } 
+  
+  else if (letter === '.') {
+    result.push('.');
+  }
+  else if (letter === '?') {
+    result.push('?');
+    
+    
+ } else if (letter === ',') {
+    result.push(','); 
+ 
+} else {
+    result.push(theKey[letter]);
+    
+  }  
+
+
+    }
+    return result;
+
+  }
+let theTextArea = document.getElementById("theTextArea");
+let theResult = document.getElementById('theResult');
+
+
+function decrypt() {
+let result = encryptAndDecrypt(theTextArea.value);
+theResult.innerHTML = result.join(''); 
+theTextArea.value = "";   
+}
+</script>
+</body>
+
+
+    
+</html>
